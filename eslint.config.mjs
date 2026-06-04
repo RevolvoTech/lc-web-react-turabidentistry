@@ -1,9 +1,12 @@
+import tseslint from "typescript-eslint";
+
 export default [
   {
     ignores: [".next/**", "node_modules/**"],
   },
+  ...tseslint.configs.recommended,
   {
-    files: ["**/*.{js,jsx}"],
+    files: ["**/*.{js,jsx,ts,tsx}"],
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",

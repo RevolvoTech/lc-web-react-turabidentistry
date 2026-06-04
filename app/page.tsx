@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { LucideIcon } from "lucide-react";
 import {
   Award,
   BadgeCheck,
@@ -16,9 +17,37 @@ import {
   UserRoundCheck,
 } from "lucide-react";
 import LeadForm from "./components/LeadForm";
-import { buildWhatsAppUrl, clinic } from "./config";
+import { buildWhatsAppUrl, clinic, mapEmbedUrl } from "./config";
 
-const treatments = [
+type Treatment = {
+  title: string;
+  description: string;
+  image: string;
+  icon: LucideIcon;
+};
+
+type IconText = {
+  icon: LucideIcon;
+  label: string;
+};
+
+type ProcessStep = {
+  icon: LucideIcon;
+  title: string;
+  text: string;
+};
+
+type Review = {
+  name: string;
+  text: string;
+};
+
+type Faq = {
+  question: string;
+  answer: string;
+};
+
+const treatments: Treatment[] = [
   {
     title: "Porcelain Veneers",
     description: "Custom smile design for balanced, natural-looking shape and shade.",
@@ -39,13 +68,13 @@ const treatments = [
   },
 ];
 
-const trustItems = [
+const trustItems: IconText[] = [
   { icon: ShieldCheck, label: "Focused safety protocols" },
   { icon: Gem, label: "Premium materials" },
   { icon: Star, label: "Natural, lasting results" },
 ];
 
-const processSteps = [
+const processSteps: ProcessStep[] = [
   {
     icon: CalendarDays,
     title: "Book a smile assessment",
@@ -60,6 +89,40 @@ const processSteps = [
     icon: Award,
     title: "Start with confidence",
     text: "Care is planned around aesthetics, function, and long-term oral health.",
+  },
+];
+
+const reviews: Review[] = [
+  {
+    name: "Smile Design Patient",
+    text: "The consultation felt calm and clear. The team explained the options before recommending treatment.",
+  },
+  {
+    name: "Implant Consultation",
+    text: "I understood the full plan, timeline, and care steps before making a decision.",
+  },
+  {
+    name: "Family Checkup",
+    text: "Professional environment, easy booking, and a comfortable visit for routine dental care.",
+  },
+];
+
+const faqs: Faq[] = [
+  {
+    question: "How soon can I request an appointment?",
+    answer: "Use the booking form or WhatsApp button to send your preferred date and time. The clinic team can confirm the nearest available slot.",
+  },
+  {
+    question: "Do you offer cosmetic smile treatments?",
+    answer: "Yes. The site currently highlights veneers, aligners, implants, root canal care, and family dental checkups.",
+  },
+  {
+    question: "Will the selected time be sent correctly?",
+    answer: "Yes. The form converts the selected calendar date and time into Pakistan time before opening WhatsApp.",
+  },
+  {
+    question: "Can this connect to Supabase later?",
+    answer: "Yes. The current flow is frontend-only. Once Supabase credentials are available, appointment requests can also be saved in a database.",
   },
 ];
 
@@ -99,7 +162,7 @@ export default function Home() {
             <a className="brand" href="#top" aria-label="Turabi Dentistry home">
               <Image
                 className="brand-logo"
-                src="/images/logo.png"
+                src="/images/logo-header.png"
                 alt="Turabi Dentistry"
                 width={2625}
                 height={967}
@@ -115,7 +178,7 @@ export default function Home() {
               </a>
               <a href="#results">Smile Gallery</a>
               <a href="#experience">Patient Experience</a>
-              <a href="#consultation">Pricing</a>
+              <a href="#faq">FAQ</a>
               <a href="#contact">Contact</a>
             </div>
 
@@ -270,6 +333,28 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="reviews-section" aria-label="Patient feedback">
+        <div className="container section-heading">
+          <p className="section-kicker">Patient Confidence</p>
+          <h2>Built around clarity before treatment begins.</h2>
+        </div>
+        <div className="container review-grid">
+          {reviews.map((review) => (
+            <article className="review-card" key={review.name}>
+              <div className="review-stars" aria-label="Five star feedback">
+                <Star size={17} aria-hidden="true" />
+                <Star size={17} aria-hidden="true" />
+                <Star size={17} aria-hidden="true" />
+                <Star size={17} aria-hidden="true" />
+                <Star size={17} aria-hidden="true" />
+              </div>
+              <p>{review.text}</p>
+              <strong>{review.name}</strong>
+            </article>
+          ))}
+        </div>
+      </section>
+
       <section className="consultation-section" id="consultation">
         <div className="container consultation-grid">
           <div className="consultation-copy">
@@ -299,6 +384,23 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="faq-section" id="faq" aria-label="Common questions">
+        <div className="container faq-grid">
+          <div>
+            <p className="section-kicker">Before You Book</p>
+            <h2>Common patient questions.</h2>
+          </div>
+          <div className="faq-list">
+            {faqs.map((faq) => (
+              <details key={faq.question}>
+                <summary>{faq.question}</summary>
+                <p>{faq.answer}</p>
+              </details>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="contact-section" id="contact">
         <div className="container contact-grid">
           <div>
@@ -317,12 +419,35 @@ export default function Home() {
             </a>
           </div>
         </div>
+        <div className="container map-frame">
+          <iframe
+            title="Turabi Dentistry location on Google Maps"
+            src={mapEmbedUrl}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </div>
       </section>
 
       <a className="whatsapp-float" href={quickWhatsAppUrl} target="_blank" rel="noreferrer" aria-label="Start a WhatsApp inquiry">
         <span>Chat with us on WhatsApp</span>
         <MessageCircle size={34} aria-hidden="true" />
       </a>
+
+      <div className="mobile-action-bar" aria-label="Quick appointment actions">
+        <a href={`tel:${clinic.phoneE164}`}>
+          <Phone size={18} aria-hidden="true" />
+          Call
+        </a>
+        <a href="#consultation">
+          <CalendarDays size={18} aria-hidden="true" />
+          Book
+        </a>
+        <a href={quickWhatsAppUrl} target="_blank" rel="noreferrer">
+          <MessageCircle size={18} aria-hidden="true" />
+          WhatsApp
+        </a>
+      </div>
     </main>
   );
 }
