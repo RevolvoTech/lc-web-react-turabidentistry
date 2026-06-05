@@ -16,6 +16,8 @@ export const clinic: ClinicConfig = {
   phoneE164: "923065313572",
 };
 
+export const siteUrl = "https://turabi-dentistry.vercel.app";
+
 const encodedMapAddress = encodeURIComponent(clinic.address);
 
 export const mapEmbedUrl = `https://maps.google.com/maps?q=${encodedMapAddress}&z=17&output=embed`;

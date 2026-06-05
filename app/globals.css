@@ -86,6 +86,10 @@ textarea {
   font-weight: 700;
 }
 
+.mobile-strip-line {
+  display: none;
+}
+
 .strip-inner svg {
   color: var(--gold-600);
 }
@@ -1173,40 +1177,52 @@ textarea {
   .strip-inner {
     min-height: auto;
     padding: 8px 0;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: center;
-    gap: 7px;
+    align-items: center;
+    flex-direction: row;
+    justify-content: stretch;
+    gap: 0;
   }
 
-  .strip-inner p {
-    gap: 7px;
-    font-size: 12px;
-    line-height: 1.2;
+  .strip-inner > p,
+  .strip-contact {
+    display: none;
   }
 
   .strip-inner svg {
-    width: 14px;
-    height: 14px;
+    width: 13px;
+    height: 13px;
   }
 
-  .strip-contact {
+  .mobile-strip-line {
     width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 7px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--cream-50);
     font-size: 12px;
+    font-weight: 800;
     line-height: 1.2;
+    white-space: nowrap;
   }
 
-  .strip-contact span,
-  .strip-contact a {
+  .mobile-strip-line a,
+  .mobile-strip-line span {
+    display: inline-flex;
+    align-items: center;
     min-width: 0;
-    gap: 7px;
+    gap: 6px;
   }
 
-  .strip-contact span:last-child {
-    grid-column: 1 / -1;
+  .mobile-strip-line a {
+    flex: 0 0 auto;
+  }
+
+  .mobile-strip-line span {
+    flex: 1 1 auto;
+    justify-content: flex-end;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .nav-inner {

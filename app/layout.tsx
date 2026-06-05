@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
-import { clinic } from "./config";
+import { clinic, siteUrl } from "./config";
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     description:
       "Book braces, aligners, implants, RCT, bridges, surgery, full mouth rehabilitation, and family dental checkups in Bhalwal.",
     type: "website",
-    url: "https://turabi-dentistry.vercel.app",
+    url: siteUrl,
   },
 };
 
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
     address: clinic.address,
     telephone: clinic.phoneDisplay,
     areaServed: clinic.cityLine,
-    url: "https://turabi-dentistry.vercel.app",
+    url: siteUrl,
     medicalSpecialty: [
       "Cosmetic dentistry",
       "Dental implants",

@@ -165,16 +165,19 @@ export default function Home() {
               <Sparkles size={18} aria-hidden="true" />
               Premium Dentistry in a Calm Hospital Environment
             </p>
+            <div className="mobile-strip-line">
+              <a href={`tel:${clinic.phoneE164}`}>
+                <Phone size={15} aria-hidden="true" />
+                {clinic.phoneDisplay}
+              </a>
+              <span>Book your smile assessment</span>
+            </div>
             <div className="strip-contact">
-              <span>
-                <MapPin size={17} aria-hidden="true" />
-                {clinic.cityLine}
-              </span>
               <a href={`tel:${clinic.phoneE164}`}>
                 <Phone size={17} aria-hidden="true" />
                 {clinic.phoneDisplay}
               </a>
-              <span>
+              <span className="strip-address">
                 <MapPin size={17} aria-hidden="true" />
                 {clinic.location}
               </span>
