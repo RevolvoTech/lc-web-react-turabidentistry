@@ -111,10 +111,13 @@ export default function LeadForm() {
         Treatment interest
         <select name="treatment" value={form.treatment} onChange={updateField}>
           <option>Smile assessment</option>
-          <option>Porcelain veneers</option>
-          <option>Dental implants</option>
+          <option>Braces</option>
           <option>Clear aligners</option>
-          <option>Root canal treatment</option>
+          <option>Dental implants</option>
+          <option>RCT / Root canal treatment</option>
+          <option>Dental bridge</option>
+          <option>Oral surgery</option>
+          <option>Full mouth rehabilitation</option>
           <option>Family dental checkup</option>
         </select>
       </label>

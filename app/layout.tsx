@@ -19,11 +19,11 @@ const display = Cormorant_Garamond({
 export const metadata: Metadata = {
   title: "Turabi Dentistry | Dentist Hospital in Bhalwal",
   description:
-    "Premium dental care, cosmetic dentistry, implants, aligners, and family dentistry in Bhalwal.",
+    "Premium dental care, braces, aligners, implants, RCT, bridges, surgery, and full mouth rehabilitation in Bhalwal.",
   openGraph: {
     title: "Turabi Dentistry | Dentist Hospital in Bhalwal",
     description:
-      "Book cosmetic dentistry, implants, aligners, root canal care, and family dental checkups in Bhalwal.",
+      "Book braces, aligners, implants, RCT, bridges, surgery, full mouth rehabilitation, and family dental checkups in Bhalwal.",
     type: "website",
     url: "https://turabi-dentistry.vercel.app",
   },
@@ -53,7 +53,15 @@ export default function RootLayout({ children }: RootLayoutProps) {
     telephone: clinic.phoneDisplay,
     areaServed: clinic.cityLine,
     url: "https://turabi-dentistry.vercel.app",
-    medicalSpecialty: ["Cosmetic dentistry", "Dental implants", "Orthodontics", "Root canal therapy"],
+    medicalSpecialty: [
+      "Cosmetic dentistry",
+      "Dental implants",
+      "Orthodontics",
+      "Root canal therapy",
+      "Dental bridges",
+      "Oral surgery",
+      "Full mouth rehabilitation",
+    ],
   };
 
   return (

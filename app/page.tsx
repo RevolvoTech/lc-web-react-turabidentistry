@@ -9,7 +9,6 @@ import {
   Gem,
   HeartPulse,
   MapPin,
-  MessageCircle,
   Phone,
   ShieldCheck,
   Sparkles,
@@ -17,7 +16,7 @@ import {
   UserRoundCheck,
 } from "lucide-react";
 import LeadForm from "./components/LeadForm";
-import { buildWhatsAppUrl, clinic, mapEmbedUrl } from "./config";
+import { buildWhatsAppUrl, clinic, mapDirectionsUrl, mapEmbedUrl } from "./config";
 
 type Treatment = {
   title: string;
@@ -47,11 +46,31 @@ type Faq = {
   answer: string;
 };
 
+type WhatsAppIconProps = {
+  size?: number;
+};
+
+function WhatsAppIcon({ size = 20 }: WhatsAppIconProps) {
+  return (
+    <svg
+      className="whatsapp-mark"
+      width={size}
+      height={size}
+      viewBox="0 0 16 16"
+      fill="currentColor"
+      aria-hidden="true"
+      focusable="false"
+    >
+      <path d="M13.6 2.3A7.8 7.8 0 0 0 8 0C3.6 0 .1 3.6.1 7.9c0 1.4.4 2.8 1.1 4L0 16l4.2-1.1a7.9 7.9 0 0 0 3.8 1c4.4 0 7.9-3.6 7.9-7.9 0-2.1-.8-4.1-2.3-5.7ZM8 14.5c-1.2 0-2.3-.3-3.4-.9l-.2-.1-2.5.6.7-2.4-.2-.3a6.5 6.5 0 0 1-1-3.5C1.4 4.3 4.4 1.3 8 1.3c1.8 0 3.4.7 4.7 1.9a6.5 6.5 0 0 1 1.9 4.7c0 3.6-3 6.6-6.6 6.6Zm3.6-4.9c-.2-.1-1.2-.6-1.4-.6-.2-.1-.3-.1-.4.1l-.6.8c-.1.1-.2.1-.4 0-.2-.1-.8-.3-1.6-1-.6-.5-1-1.2-1.1-1.4-.1-.2 0-.3.1-.4l.3-.3c.1-.1.1-.2.2-.3.1-.1 0-.2 0-.3 0-.1-.4-1.1-.6-1.5-.2-.4-.3-.3-.4-.3h-.4c-.1 0-.4.1-.5.2-.2.2-.7.7-.7 1.7s.7 1.9.8 2c.1.1 1.4 2.1 3.4 3 .5.2.8.3 1.1.4.5.2.9.1 1.2.1.4-.1 1.2-.5 1.3-.9.2-.5.2-.9.1-1 0-.1-.2-.2-.4-.3Z" />
+    </svg>
+  );
+}
+
 const treatments: Treatment[] = [
   {
-    title: "Porcelain Veneers",
-    description: "Custom smile design for balanced, natural-looking shape and shade.",
-    image: "/images/veneers-before-after.png",
+    title: "Braces",
+    description: "Planned orthodontic care for straighter teeth, bite balance, and confident smiles.",
+    image: "/images/braces-before-after.png",
     icon: Gem,
   },
   {
@@ -61,8 +80,8 @@ const treatments: Treatment[] = [
     icon: ShieldCheck,
   },
   {
-    title: "Clear Aligners",
-    description: "Discreet alignment care for straighter teeth with everyday convenience.",
+    title: "Full Mouth Rehabilitation",
+    description: "Comprehensive planning for bite, function, restorations, and long-term oral health.",
     image: "/images/aligners-before-after.png",
     icon: Star,
   },
@@ -72,6 +91,12 @@ const trustItems: IconText[] = [
   { icon: ShieldCheck, label: "Focused safety protocols" },
   { icon: Gem, label: "Premium materials" },
   { icon: Star, label: "Natural, lasting results" },
+];
+
+const mobileTrustItems: IconText[] = [
+  { icon: ShieldCheck, label: "Safety protocols" },
+  { icon: Gem, label: "Premium materials" },
+  { icon: Star, label: "Results" },
 ];
 
 const processSteps: ProcessStep[] = [
@@ -114,7 +139,7 @@ const faqs: Faq[] = [
   },
   {
     question: "Do you offer cosmetic smile treatments?",
-    answer: "Yes. The site currently highlights veneers, aligners, implants, root canal care, and family dental checkups.",
+    answer: "Yes. The site currently highlights braces, implants, full mouth rehabilitation, root canal care, and family dental checkups.",
   },
   {
     question: "Will the selected time be sent correctly?",
@@ -132,7 +157,7 @@ export default function Home() {
   );
 
   return (
-    <main>
+    <main id="top">
       <header className="site-header">
         <div className="top-strip">
           <div className="container strip-inner">
@@ -162,7 +187,7 @@ export default function Home() {
             <a className="brand" href="#top" aria-label="Turabi Dentistry home">
               <Image
                 className="brand-logo"
-                src="/images/logo-header.png"
+                src="/images/logo.png"
                 alt="Turabi Dentistry"
                 width={2625}
                 height={967}
@@ -190,10 +215,10 @@ export default function Home() {
         </nav>
       </header>
 
-      <section className="hero" id="top">
+      <section className="hero">
         <Image
           className="hero-image"
-          src="/images/hero-patient.png"
+          src="/images/hero-patient-premium.png"
           alt="Smiling dental patient in a premium clinic environment"
           fill
           priority
@@ -242,6 +267,60 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="mobile-hero" aria-label="Turabi Dentistry mobile introduction">
+        <div className="mobile-hero-media">
+          <Image
+            src="/images/hero-patient-premium.png"
+            alt="Smiling dental patient in a premium clinic environment"
+            fill
+            priority
+            sizes="100vw"
+          />
+          <div className="mobile-hero-location">
+            <MapPin size={15} aria-hidden="true" />
+            Dentist hospital in {clinic.cityLine}
+          </div>
+        </div>
+
+        <div className="container mobile-hero-content">
+          <p className="eyebrow mobile-hero-kicker">
+            <Sparkles size={18} aria-hidden="true" />
+            Artistry. Precision. Confidence.
+          </p>
+          <h1>
+            Redefine Your <span>Smile</span>
+          </h1>
+          <p className="mobile-hero-copy">
+            Premium dental care in Bhalwal designed around comfort, clarity, and natural-looking results.
+          </p>
+
+          <div className="mobile-hero-actions">
+            <a className="button button-primary" href="#consultation">
+              <CalendarDays size={20} aria-hidden="true" />
+              Book Smile Assessment
+              <ChevronRight size={19} aria-hidden="true" />
+            </a>
+            <a className="button button-ghost" href="#treatments">
+              View Treatments
+            </a>
+          </div>
+
+          <div className="mobile-trust-grid" aria-label="Practice highlights">
+            {mobileTrustItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <div className="mobile-trust-item" key={item.label}>
+                  <span>
+                    <Icon size={19} aria-hidden="true" />
+                  </span>
+                  <strong>{item.label}</strong>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className="treatments-band" id="treatments">
         <div className="container treatment-grid">
           {treatments.map((treatment) => {
@@ -283,53 +362,81 @@ export default function Home() {
       </section>
 
       <section className="about-section" id="about">
-        <div className="container about-grid">
-          <div>
-            <p className="section-kicker">Dentist hospital in Bhalwal</p>
-            <h2>Designed for patients who want clear answers and confident care.</h2>
-          </div>
-          <p>
-            Turabi Dentistry brings cosmetic and general dental care into a calm, professional setting.
-            Every appointment is built around understanding the concern first, then recommending care that
-            fits the patient&apos;s comfort, timeline, and oral health needs.
-          </p>
-        </div>
+        <div className="container about-split-grid">
+          <div className="about-copy-panel">
+            <div className="about-grid">
+              <div>
+                <p className="section-kicker">Dentist hospital in Bhalwal</p>
+                <h2>Designed for patients who want clear answers and confident care.</h2>
+              </div>
+              <p>
+                Turabi Dentistry brings cosmetic and general dental care into a calm, professional setting.
+                Every appointment is built around understanding the concern first, then recommending care that
+                fits the patient&apos;s comfort, timeline, and oral health needs.
+              </p>
+            </div>
 
-        <div className="container stats-grid">
-          <div>
-            <strong>01</strong>
-            <span>Comfort-first consultation</span>
+            <div className="stats-grid about-stats-grid">
+              <div>
+                <strong>01</strong>
+                <span>Comfort-first consultation</span>
+              </div>
+              <div>
+                <strong>02</strong>
+                <span>Cosmetic and family dentistry</span>
+              </div>
+              <div>
+                <strong>03</strong>
+                <span>Clear next steps after inquiry</span>
+              </div>
+            </div>
           </div>
-          <div>
-            <strong>02</strong>
-            <span>Cosmetic and family dentistry</span>
-          </div>
-          <div>
-            <strong>03</strong>
-            <span>Clear next steps after inquiry</span>
-          </div>
+
+          <figure className="about-image-frame">
+            <Image
+              src="/images/aligner-precision.png"
+              alt="Clear aligner being prepared inside the Turabi Dentistry clinic"
+              fill
+              sizes="(max-width: 1080px) 100vw, 42vw"
+            />
+          </figure>
         </div>
       </section>
 
       <section className="experience-section" id="experience">
-        <div className="container section-heading">
-          <p className="section-kicker">Patient Experience</p>
-          <h2>A calm path from first message to treatment plan.</h2>
-        </div>
+        <div className="container experience-split-grid">
+          <div className="experience-copy-stack">
+            <div className="section-heading experience-heading">
+              <p className="section-kicker">Patient Experience</p>
+              <h2>A calm path from first message to treatment plan.</h2>
+            </div>
 
-        <div className="container process-grid">
-          {processSteps.map((step) => {
-            const Icon = step.icon;
-            return (
-              <article className="process-card" key={step.title}>
-                <span>
-                  <Icon size={27} aria-hidden="true" />
-                </span>
-                <h3>{step.title}</h3>
-                <p>{step.text}</p>
-              </article>
-            );
-          })}
+            <div className="process-grid process-timeline">
+              {processSteps.map((step) => {
+                const Icon = step.icon;
+                return (
+                  <article className="process-card" key={step.title}>
+                    <span>
+                      <Icon size={27} aria-hidden="true" />
+                    </span>
+                    <div>
+                      <h3>{step.title}</h3>
+                      <p>{step.text}</p>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </div>
+
+          <figure className="experience-image-frame">
+            <Image
+              src="/images/treatment-closeup.png"
+              alt="Turabi Dentistry doctor providing careful dental treatment"
+              fill
+              sizes="(max-width: 1080px) 100vw, 43vw"
+            />
+          </figure>
         </div>
       </section>
 
@@ -406,16 +513,20 @@ export default function Home() {
           <div>
             <p className="section-kicker">Contact</p>
             <h2>Turabi Dentistry, Bhalwal</h2>
-            <p>{clinic.location}. Send an appointment inquiry for cosmetic dentistry, implants, aligners, root canal care, or a family dental checkup.</p>
+            <p>{clinic.location}. Send an appointment inquiry for braces, aligners, implants, RCT, bridges, surgery, full mouth rehabilitation, or a family dental checkup.</p>
           </div>
           <div className="contact-actions">
             <a className="button button-primary" href={quickWhatsAppUrl} target="_blank" rel="noreferrer">
-              <MessageCircle size={20} aria-hidden="true" />
+              <WhatsAppIcon size={20} />
               WhatsApp Inquiry
             </a>
             <a className="button button-outline" href={`tel:${clinic.phoneE164}`}>
               <Phone size={20} aria-hidden="true" />
               Call Clinic
+            </a>
+            <a className="button button-outline" href={mapDirectionsUrl} target="_blank" rel="noreferrer">
+              <MapPin size={20} aria-hidden="true" />
+              Get Directions
             </a>
           </div>
         </div>
@@ -426,12 +537,19 @@ export default function Home() {
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
           />
+          <a className="map-directions-card" href={mapDirectionsUrl} target="_blank" rel="noreferrer">
+            <MapPin size={20} aria-hidden="true" />
+            <span>
+              <strong>Turabi Dentistry</strong>
+              <small>{clinic.location}</small>
+            </span>
+          </a>
         </div>
       </section>
 
       <a className="whatsapp-float" href={quickWhatsAppUrl} target="_blank" rel="noreferrer" aria-label="Start a WhatsApp inquiry">
         <span>Chat with us on WhatsApp</span>
-        <MessageCircle size={34} aria-hidden="true" />
+        <WhatsAppIcon size={34} />
       </a>
 
       <div className="mobile-action-bar" aria-label="Quick appointment actions">
@@ -444,8 +562,8 @@ export default function Home() {
           Book
         </a>
         <a href={quickWhatsAppUrl} target="_blank" rel="noreferrer">
-          <MessageCircle size={18} aria-hidden="true" />
-          WhatsApp
+          <WhatsAppIcon size={18} />
+          Chat
         </a>
       </div>
     </main>
