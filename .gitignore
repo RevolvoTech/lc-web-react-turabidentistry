@@ -4,6 +4,7 @@ out/
 leads/*.jsonl
 tmp/
 *.log
+*.tsbuildinfo
 .env*
 
 .vercel
