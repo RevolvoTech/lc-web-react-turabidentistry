@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
 import {
@@ -124,6 +125,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
         />
         {children}
+        <Analytics />
       </body>
     </html>
   );
