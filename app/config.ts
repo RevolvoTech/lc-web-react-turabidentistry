@@ -27,6 +27,9 @@ export const clinic: ClinicConfig = {
 };
 
 export const siteUrl = "https://turabi-dentistry.vercel.app";
+export const googleMapsPlusCode = "8J4J7W82+HWR";
+export const clinicLatitude = 32.2664875;
+export const clinicLongitude = 72.902265625;
 
 export const clinicServices = [
   "Braces",
@@ -39,10 +42,10 @@ export const clinicServices = [
   "Family dental checkups",
 ];
 
-const encodedMapAddress = encodeURIComponent(clinic.address);
+const encodedMapCoordinates = encodeURIComponent(`${clinicLatitude},${clinicLongitude}`);
 
-export const mapEmbedUrl = `https://maps.google.com/maps?q=${encodedMapAddress}&z=17&output=embed`;
-export const mapDirectionsUrl = `https://www.google.com/maps/search/?api=1&query=${encodedMapAddress}`;
+export const mapEmbedUrl = `https://maps.google.com/maps?q=${encodedMapCoordinates}&z=18&output=embed`;
+export const mapDirectionsUrl = `https://www.google.com/maps/dir/?api=1&destination=${encodedMapCoordinates}&travelmode=driving`;
 
 export function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${clinic.phoneE164}?text=${encodeURIComponent(message)}`;

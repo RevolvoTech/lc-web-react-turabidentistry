@@ -2,7 +2,15 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { Cormorant_Garamond, Manrope } from "next/font/google";
 import "./globals.css";
-import { clinic, clinicServices, mapDirectionsUrl, siteUrl } from "./config";
+import {
+  clinic,
+  clinicLatitude,
+  clinicLongitude,
+  clinicServices,
+  googleMapsPlusCode,
+  mapDirectionsUrl,
+  siteUrl,
+} from "./config";
 
 const sans = Manrope({
   subsets: ["latin"],
@@ -67,6 +75,16 @@ export default function RootLayout({ children }: RootLayoutProps) {
       addressRegion: clinic.addressRegion,
       postalCode: clinic.postalCode,
       addressCountry: clinic.addressCountry,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: clinicLatitude,
+      longitude: clinicLongitude,
+    },
+    additionalProperty: {
+      "@type": "PropertyValue",
+      name: "Google Plus Code",
+      value: googleMapsPlusCode,
     },
     areaServed: {
       "@type": "City",

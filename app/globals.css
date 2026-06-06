@@ -306,6 +306,10 @@ textarea {
   display: none;
 }
 
+.mobile-hero-media {
+  position: relative;
+}
+
 .treatments-band {
   position: relative;
   z-index: 3;
@@ -1419,7 +1423,6 @@ textarea {
   }
 
   .mobile-hero-media {
-    position: relative;
     height: clamp(188px, 48vw, 214px);
     overflow: hidden;
     background: var(--cream-200);

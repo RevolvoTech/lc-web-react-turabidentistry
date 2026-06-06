@@ -119,35 +119,43 @@ const processSteps: ProcessStep[] = [
 
 const reviews: Review[] = [
   {
-    name: "Smile Design Patient",
-    text: "The consultation felt calm and clear. The team explained the options before recommending treatment.",
+    name: "Clear treatment explanations",
+    text: "Patients are guided through the concern, suitable options, expected steps, and follow-up needs before treatment begins.",
   },
   {
-    name: "Implant Consultation",
-    text: "I understood the full plan, timeline, and care steps before making a decision.",
+    name: "Comfort-conscious visits",
+    text: "Appointments are planned around a calm clinic experience, clear communication, and practical comfort steps during care.",
   },
   {
-    name: "Family Checkup",
-    text: "Professional environment, easy booking, and a comfortable visit for routine dental care.",
+    name: "Phone-first appointment support",
+    text: "New patients can share their concern and preferred time through WhatsApp or the booking form before the clinic confirms availability.",
   },
 ];
 
 const faqs: Faq[] = [
   {
-    question: "How soon can I request an appointment?",
-    answer: "Use the booking form or WhatsApp button to send your preferred date and time. The clinic team can confirm the nearest available slot.",
+    question: "Where is Turabi Dentistry located?",
+    answer: "Turabi Dentistry is located on Imambargah Road, Main Bazar, Bhalwal, 40410. You can use the directions button on this website to open the clinic location in Google Maps.",
   },
   {
-    question: "Do you offer cosmetic smile treatments?",
-    answer: "Yes. The site currently highlights braces, implants, full mouth rehabilitation, root canal care, and family dental checkups.",
+    question: "Which dental treatments can I ask about?",
+    answer: "You can request a consultation for braces, clear aligners, dental implants, root canal treatment, dental bridges, oral surgery, full mouth rehabilitation, and family dental checkups.",
   },
   {
-    question: "Will the selected time be sent correctly?",
-    answer: "Yes. The form converts the selected calendar date and time into Pakistan time before opening WhatsApp.",
+    question: "Are braces and clear aligners the same treatment?",
+    answer: "Both are orthodontic treatments used to improve tooth alignment, but they are different options. The dentist can guide you on whether braces, clear aligners, or another plan is suitable after assessing your teeth and bite.",
   },
   {
-    question: "Can this connect to Supabase later?",
-    answer: "Yes. The current flow is frontend-only. Once Supabase credentials are available, appointment requests can also be saved in a database.",
+    question: "Do I need a consultation before starting treatment?",
+    answer: "Yes. A consultation helps the dentist understand your concern, check your oral health, explain suitable options, and recommend the right next step before treatment begins.",
+  },
+  {
+    question: "How do I book an appointment?",
+    answer: "You can call the clinic, send a WhatsApp message, or use the appointment form. Share your name, phone number, treatment concern, and preferred time so the clinic team can confirm availability.",
+  },
+  {
+    question: "What should I bring to my first visit?",
+    answer: "Bring any previous dental X-rays, prescriptions, medical history, and details of current medicines if available. If you have pain or swelling, mention when it started and what makes it worse.",
   },
 ];
 
@@ -277,7 +285,7 @@ export default function Home() {
             alt="Smiling dental patient in a premium clinic environment"
             fill
             priority
-            sizes="100vw"
+            sizes="(max-width: 760px) 100vw, 1px"
           />
           <div className="mobile-hero-location">
             <MapPin size={15} aria-hidden="true" />
@@ -443,21 +451,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="reviews-section" aria-label="Patient feedback">
+      <section className="reviews-section" aria-label="Patient priorities">
         <div className="container section-heading">
-          <p className="section-kicker">Patient Confidence</p>
-          <h2>Built around clarity before treatment begins.</h2>
+          <p className="section-kicker">Patient Experience</p>
+          <h2>Built around clarity, comfort, and confident next steps.</h2>
         </div>
         <div className="container review-grid">
           {reviews.map((review) => (
             <article className="review-card" key={review.name}>
-              <div className="review-stars" aria-label="Five star feedback">
-                <Star size={17} aria-hidden="true" />
-                <Star size={17} aria-hidden="true" />
-                <Star size={17} aria-hidden="true" />
-                <Star size={17} aria-hidden="true" />
-                <Star size={17} aria-hidden="true" />
-              </div>
               <p>{review.text}</p>
               <strong>{review.name}</strong>
             </article>
